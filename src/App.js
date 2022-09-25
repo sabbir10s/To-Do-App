@@ -1,8 +1,9 @@
+import Home from "./Components/Home/Home";
 
 function App() {
   return (
     <div>
-      <h1>To Do App</h1>
+      <Home />
     </div>
   );
 }
