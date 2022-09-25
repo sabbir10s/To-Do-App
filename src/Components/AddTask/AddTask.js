@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
 
-const AddTask = () => {
+const AddTask = ({ refetch, reload, setIsReload }) => {
     const [input, setInput] = useState(false)
-    const [taskInfo, setTaskInfo] = useState({ title: "Sabbir", description: "This is my To Do description", status: "research" })
     const getTitle = useRef()
     const getDescription = useRef()
     const getStatus = useRef()
@@ -12,7 +11,7 @@ const AddTask = () => {
         const description = getDescription.current.value
         const status = getStatus.current.value
         const task = { title, description, status }
-        const url = 'http://localhost:5000/task';
+        const url = 'https://todo-py13.onrender.com/task';
         fetch(url, {
             method: "POST",
             headers: {
@@ -23,13 +22,17 @@ const AddTask = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                event.target.reset()
-                setInput(false)
+                if (data.acknowledged) {
+                    event.target.reset()
+                    setInput(false)
+                    refetch()
+                }
+
             })
     }
     return (
         <div>
-            <div className='flex flex-col w-[300px]'>
+            <div className=' z-50 flex flex-col relative w-full md:w-[300px]'>
                 {
                     input === !true
                         ?

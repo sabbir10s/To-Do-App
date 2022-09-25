@@ -13,7 +13,7 @@ const UpdateTask = ({ taskId, taskInfo, setOpenModal, refetch }) => {
         const description = getDescription.current.value
         const status = getStatus.current.value
         const updateTask = { title: title, description: description, status: status }
-        const url = `http://localhost:5000/task/${_id}`;
+        const url = `https://todo-py13.onrender.com/task/${_id}`;
         fetch(url, {
             method: "PUT",
             headers: {
