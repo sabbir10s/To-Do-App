@@ -31,7 +31,7 @@ const Home = () => {
                     </div>
 
                     <div>
-                        <GetTask taskInfo={taskInfo} />
+                        <GetTask taskInfo={taskInfo} refetch={refetch} />
                     </div>
                 </div>
             </div>

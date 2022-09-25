@@ -7,6 +7,7 @@ import UpdateTask from '../GetTask/UpdateTask';
 
 const GetTask = ({ taskInfo, refetch }) => {
     const [openModal, setOpenModal] = useState("");
+    const [click, setClick] = useState(false)
     const handleDelete = (id) => {
         fetch(`https://todo-py13.onrender.com/task/${id}`, {
             method: "DELETE",
@@ -28,34 +29,43 @@ const GetTask = ({ taskInfo, refetch }) => {
                 taskInfo.map((task) =>
                     <div className='w-full md:w-[300px]' key={task._id}>
                         <div className='mt-2 '>
-                            <p className='text-lg bg-primary text-white pl-2'>{task.title}</p>
                             <div className='bg-white p-2 rounded'>
                                 {
-                                    task.status === "todo" ? <div className='h-2 bg-blue-500 w-1/3 rounded-full mb-2'></div>
+                                    task.status === "todo" ? <p className='text-lg bg-primary text-white pl-2'>{task.title}</p>
                                         :
                                         <></>
                                 }
                                 {
-                                    task.status === "research" ? <div className='h-2 bg-orange-500 w-1/3 rounded-full mb-2'></div>
+                                    task.status === "research" ? <p className='text-lg bg-orange-500 text-white pl-2'>{task.title}</p>
                                         :
                                         <></>
                                 }
                                 {
-                                    task.status === "in progress" ? <div className='h-2 bg-purple-700 w-1/3 rounded-full mb-2'></div>
+                                    task.status === "in progress" ? <p className='text-lg bg-purple-600 text-white pl-2'>{task.title}</p>
                                         :
                                         <></>
                                 }
                                 {
-                                    task.status === "review" ? <div className='h-2 bg-yellow-500 w-1/3 rounded-full mb-2'></div>
+                                    task.status === "review" ? <p className='text-lg bg-yellow-500 text-white pl-2'>{task.title}</p>
                                         :
                                         <></>
                                 }
                                 {
-                                    task.status === "completed" ? <div className='h-2 bg-green-500 w-1/3 rounded-full mb-2'></div>
+                                    task.status === "completed" ? <p className='text-lg bg-green-500 text-white pl-2'>{task.title}</p>
                                         :
                                         <></>
                                 }
-                                <p className='bg-white mb-2'>{task.description}</p>
+                                <div className='flex items-center gap-2'>
+
+                                    {
+                                        !click
+                                            ? <p className='bg-white mb-2'>{task.description.slice(0, 25)}....</p>
+                                            : <p className='bg-white mb-2'>{task.description}</p>
+                                    }
+
+
+                                </div>
+
                                 <div className='flex justify-between'>
                                     <button onClick={() => handleDelete(task._id)}><RiDeleteBinLine className='text-red-500' /></button>
                                     <p>{task.status}</p>
