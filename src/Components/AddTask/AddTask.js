@@ -1,17 +1,31 @@
 import React, { useRef, useState } from 'react';
 
-const InputToDo = () => {
+const AddTask = () => {
     const [input, setInput] = useState(false)
-    const [todoInfo, setTodoInfo] = useState({ title: "Sabbir", description: "This is my To Do description", status: "research" })
+    const [taskInfo, setTaskInfo] = useState({ title: "Sabbir", description: "This is my To Do description", status: "research" })
     const getTitle = useRef()
     const getDescription = useRef()
     const getStatus = useRef()
     const handleSubmitData = event => {
         event.preventDefault();
-        const name = getTitle.current.value;
+        const title = getTitle.current.value;
         const description = getDescription.current.value
         const status = getStatus.current.value
-        console.log(name, description, status);
+        const task = { title, description, status }
+        const url = 'http://localhost:5000/task';
+        fetch(url, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(task)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                event.target.reset()
+                setInput(false)
+            })
     }
     return (
         <div>
@@ -42,4 +56,4 @@ const InputToDo = () => {
     );
 };
 
-export default InputToDo;
+export default AddTask;

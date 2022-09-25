@@ -1,6 +1,6 @@
 import React from 'react';
-import GetToDo from '../GetToDo/GetToDo';
-import InputToDo from '../InputToDo/InputToDo';
+import AddTask from '../AddTask/AddTask';
+import GetTask from '../UpdateTask/GetTask';
 
 const Home = () => {
 
@@ -13,10 +13,10 @@ const Home = () => {
                 </div>
                 <div className='flex gap-3'>
                     <div>
-                        <GetToDo />
+                        <GetTask />
                     </div>
                     <div>
-                        <InputToDo />
+                        <AddTask />
                     </div>
                 </div>
             </div>
